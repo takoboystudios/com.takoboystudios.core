@@ -1,0 +1,25 @@
+{
+  "name": "com.takoboystudios.core",
+  "version": "1.0.0",
+  "displayName": "TakoBoy Studios Core",
+  "description": "Production-grade Unity utilities and systems including extensions, weighted selection, object pooling, FSM, and Addressables helpers.",
+  "unity": "2021.3",
+  "keywords": [
+    "utilities",
+    "extensions",
+    "pooling",
+    "fsm",
+    "selector",
+    "addressables",
+    "core"
+  ],
+  "author": {
+    "name": "TakoBoy Studios",
+    "url": "https://github.com/takoboystudios"
+  },
+  "dependencies": {
+    "com.unity.addressables": "1.19.19",
+    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask"
+  },
+  "samples": []
+}
