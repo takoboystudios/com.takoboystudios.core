@@ -285,7 +285,7 @@ namespace TakoBoyStudios.Core
         /// <returns>A pooled GameObject, or null if pool doesn't exist or can't create instance</returns>
         public GameObject Acquire(string poolName)
         {
-            return Get(poolName, Vector3.zero, Quaternion.identity, null);
+            return Acquire(poolName, Vector3.zero, Quaternion.identity, null);
         }
 
         /// <summary>
@@ -296,7 +296,7 @@ namespace TakoBoyStudios.Core
         /// <returns>A pooled GameObject, or null if pool doesn't exist or can't create instance</returns>
         public GameObject Acquire(string poolName, Vector3 position)
         {
-            return Get(poolName, position, Quaternion.identity, null);
+            return Acquire(poolName, position, Quaternion.identity, null);
         }
 
         /// <summary>
@@ -308,7 +308,7 @@ namespace TakoBoyStudios.Core
         /// <returns>A pooled GameObject, or null if pool doesn't exist or can't create instance</returns>
         public GameObject Acquire(string poolName, Vector3 position, Quaternion rotation)
         {
-            return Get(poolName, position, rotation, null);
+            return Acquire(poolName, position, rotation, null);
         }
 
         /// <summary>
@@ -363,7 +363,7 @@ namespace TakoBoyStudios.Core
         /// <returns>True if object was successfully retrieved</returns>
         public bool TryAcquire(string poolName, out GameObject result)
         {
-            result = Get(poolName);
+            result = Acquire(poolName);
             return result != null;
         }
 
