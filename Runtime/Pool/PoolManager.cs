@@ -172,9 +172,9 @@ namespace TakoBoyStudios.Core
         /// <param name="prefab">The prefab to pool</param>
         /// <param name="preWarmCount">Number of instances to pre-create (default: 10)</param>
         /// <returns>True if pool was created successfully</returns>
-        public bool CreatePool(string poolName, GameObject prefab, int preWarmCount = 10)
+        public bool CreatePool(GameObject prefab, int preWarmCount = 10)
         {
-            return CreatePool(poolName, prefab, new PoolConfig(preWarmCount, 100));
+            return CreatePool(prefab.name, prefab, new PoolConfig(preWarmCount, 100));
         }
 
         /// <summary>
@@ -283,7 +283,7 @@ namespace TakoBoyStudios.Core
         /// </summary>
         /// <param name="poolName">Name of the pool to get from</param>
         /// <returns>A pooled GameObject, or null if pool doesn't exist or can't create instance</returns>
-        public GameObject Get(string poolName)
+        public GameObject Acquire(string poolName)
         {
             return Get(poolName, Vector3.zero, Quaternion.identity, null);
         }
@@ -294,7 +294,7 @@ namespace TakoBoyStudios.Core
         /// <param name="poolName">Name of the pool to get from</param>
         /// <param name="position">World position to place the object</param>
         /// <returns>A pooled GameObject, or null if pool doesn't exist or can't create instance</returns>
-        public GameObject Get(string poolName, Vector3 position)
+        public GameObject Acquire(string poolName, Vector3 position)
         {
             return Get(poolName, position, Quaternion.identity, null);
         }
@@ -306,7 +306,7 @@ namespace TakoBoyStudios.Core
         /// <param name="position">World position to place the object</param>
         /// <param name="rotation">World rotation to apply to the object</param>
         /// <returns>A pooled GameObject, or null if pool doesn't exist or can't create instance</returns>
-        public GameObject Get(string poolName, Vector3 position, Quaternion rotation)
+        public GameObject Acquire(string poolName, Vector3 position, Quaternion rotation)
         {
             return Get(poolName, position, rotation, null);
         }
@@ -319,7 +319,7 @@ namespace TakoBoyStudios.Core
         /// <param name="rotation">World rotation to apply to the object</param>
         /// <param name="parent">Parent transform (can be null)</param>
         /// <returns>A pooled GameObject, or null if pool doesn't exist or can't create instance</returns>
-        public GameObject Get(string poolName, Vector3 position, Quaternion rotation, Transform parent)
+        public GameObject Acquire(string poolName, Vector3 position, Quaternion rotation, Transform parent)
         {
             if (!_pools.TryGetValue(poolName, out var pool))
             {
@@ -361,7 +361,7 @@ namespace TakoBoyStudios.Core
         /// <param name="poolName">Name of the pool to get from</param>
         /// <param name="result">The retrieved object, or null if failed</param>
         /// <returns>True if object was successfully retrieved</returns>
-        public bool TryGet(string poolName, out GameObject result)
+        public bool TryAcquire(string poolName, out GameObject result)
         {
             result = Get(poolName);
             return result != null;
