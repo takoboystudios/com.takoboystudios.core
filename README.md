@@ -17,9 +17,29 @@ Clone or download this repository into your project's `Packages` folder.
 
 ## Requirements
 
+This package requires the following dependencies to be installed **BEFORE** adding TakoBoy Studios Core:
+
 - **Unity 2021.3** or later
-- **Addressables** 1.19.19+ (dependency)
-- **UniTask** (optional, for async pool operations)
+- **Addressables** 1.19.19+ (REQUIRED)
+- **UniTask** (com.cysharp.unitask) (REQUIRED)
+- **Odin Inspector** (REQUIRED)
+
+### Setting Up Dependencies in manifest.json
+
+Before importing this package, add the required dependencies to your `Packages/manifest.json`:
+
+```json
+{
+  "dependencies": {
+    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+    "com.unity.addressables": "1.19.19",
+    "com.takoboystudios.core": "https://github.com/takoboystudios/com.takoboystudios.core.git"
+  },
+  "scopedRegistries": []
+}
+```
+
+**Note:** For Odin Inspector, follow the official installation instructions from the Unity Asset Store or your preferred installation method.
 
 ## Package Contents
 
@@ -222,13 +242,25 @@ The package includes `TakoBoyStudios.Core.asmdef` with:
 - Optional UniTask support via version defines
 - Auto-referenced for easy use
 
-## Dependencies
+## Related Packages
 
-**Required:**
-- Unity.Addressables (1.19.19+)
+### TakoBoy Studios Animation
 
-**Optional:**
-- UniTask (com.cysharp.unitask) - For async pooling operations
+Advanced animation utilities and systems for Unity. **Requires TakoBoy Studios Core as a dependency.**
+
+**Installation:** Add to your `manifest.json` after installing Core:
+
+```json
+{
+  "dependencies": {
+    "com.takoboystudios.animation": "https://github.com/takoboystudios/com.takoboystudios.animation.git"
+  }
+}
+```
+
+Repository: https://github.com/takoboystudios/com.takoboystudios.animation
+
+**⚠️ IMPORTANT:** TakoBoy Studios Core **MUST** be installed before adding the Animation package.
 
 ## License
 
