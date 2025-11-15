@@ -107,13 +107,13 @@ namespace TakoBoyStudios.Core
     {
         #region Private Fields
 
-        private readonly SelectionPivot _pivot;
-        private readonly SelectionRange _range;
-        private readonly System.Random _random;
-        private readonly bool _useSeededRandom;
-        private readonly Queue<object> _selectionHistory;
-        private readonly int _maxHistorySize;
-        private readonly Dictionary<string, float[]> _cachedWeights;
+        readonly SelectionPivot _pivot;
+        readonly SelectionRange _range;
+        readonly System.Random _random;
+        readonly bool _useSeededRandom;
+        readonly Queue<object> _selectionHistory;
+        readonly int _maxHistorySize;
+        readonly Dictionary<string, float[]> _cachedWeights;
 
         #endregion
 
@@ -191,7 +191,7 @@ namespace TakoBoyStudios.Core
         /// <summary>
         /// Internal constructor used by the builder pattern.
         /// </summary>
-        private Selector(SelectionPivot pivot, SelectionRange range, int? seed, int historySize)
+        Selector(SelectionPivot pivot, SelectionRange range, int? seed, int historySize)
         {
             _pivot = pivot;
             _range = range;
@@ -586,7 +586,7 @@ namespace TakoBoyStudios.Core
         /// <summary>
         /// Tracks a selection in history if history tracking is enabled.
         /// </summary>
-        private void TrackSelection<T>(T item) where T : ISelectable
+        void TrackSelection<T>(T item) where T : ISelectable
         {
             if (_maxHistorySize <= 0)
                 return;
@@ -622,7 +622,7 @@ namespace TakoBoyStudios.Core
         /// <summary>
         /// Validates input parameters for selection methods.
         /// </summary>
-        private void ValidateInput<T>(IEnumerable<T> candidates, float bonus) where T : ISelectable
+        void ValidateInput<T>(IEnumerable<T> candidates, float bonus) where T : ISelectable
         {
             if (candidates == null)
                 throw new ArgumentNullException(nameof(candidates), "Candidates collection cannot be null");
@@ -659,10 +659,10 @@ namespace TakoBoyStudios.Core
         /// </summary>
         public class SelectorBuilder
         {
-            private SelectionPivot _pivot = SelectionPivot.Mean;
-            private SelectionRange _range = SelectionRange.All;
-            private int? _seed = null;
-            private int _historySize = 0;
+            SelectionPivot _pivot = SelectionPivot.Mean;
+            SelectionRange _range = SelectionRange.All;
+            int? _seed = null;
+            int _historySize = 0;
 
             /// <summary>
             /// Sets the selection pivot mode.
