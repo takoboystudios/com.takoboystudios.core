@@ -1,6 +1,6 @@
 {
   "name": "com.takoboystudios.core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "com.takoboystudios.core",
   "description": "Production-grade Unity utilities and systems including extensions, weighted selection, object pooling, FSM, and Addressables helpers.",
   "unity": "2021.3",

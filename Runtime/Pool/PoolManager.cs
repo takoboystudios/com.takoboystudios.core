@@ -105,18 +105,23 @@ namespace TakoBoyStudios.Core
         {
             get
             {
-                if (_instance == null)
-                {
-                    _instance = FindObjectOfType<PoolManager>();
+                if (_instance != null)
+                    return _instance;
 
-                    if (_instance == null)
-                    {
-                        GameObject go = new GameObject("[PoolManager]");
-                        _instance = go.AddComponent<PoolManager>();
-                        DontDestroyOnLoad(go);
-                    }
-                }
+                _instance = FindFirstObjectByType<PoolManager>();
+                if (_instance != null)
+                    return _instance;
 
+                // There is no pooling outside play mode. Spinning up the singleton here would call
+                // DontDestroyOnLoad, which is illegal in edit mode and throws during asset imports and
+                // OnValidate, and it would leak a [PoolManager] object into the scene being edited.
+                // Callers already null-check Instance for exactly this case, so hand back null instead.
+                if (!Application.isPlaying)
+                    return null;
+
+                GameObject go = new GameObject("[PoolManager]");
+                _instance = go.AddComponent<PoolManager>();
+                DontDestroyOnLoad(go);
                 return _instance;
             }
         }
@@ -144,7 +149,11 @@ namespace TakoBoyStudios.Core
             }
 
             _instance = this;
-            DontDestroyOnLoad(gameObject);
+
+            // DontDestroyOnLoad is play-mode only; guard so a PoolManager living in an edited scene
+            // can never trip the same edit-mode exception.
+            if (Application.isPlaying)
+                DontDestroyOnLoad(gameObject);
         }
 
         private void OnDestroy()
